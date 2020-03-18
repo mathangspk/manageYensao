@@ -6,7 +6,7 @@ require('dotenv/config');
 const orders = require('./routes/api/orders')
 const userRoute = require('./routes/user');
 const product = require('./routes/api/products');
-
+const customer = require('./routes/api/customer');
 
 const app = express();
 
@@ -34,6 +34,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreat
 app.use('/api/orders',orders);
 app.use('/users',userRoute);
 app.use('/api/products',product);
+app.use('/api/customers',customer);
 
 const port = process.env.PORT || 5000 
 app.listen(port, () => {
