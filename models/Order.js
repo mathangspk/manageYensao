@@ -24,7 +24,7 @@ const OrderSchema = new Schema({
         required: true
     },
     status: {
-        type: Number,
+        type: String,
         required: true
     },
     date: {

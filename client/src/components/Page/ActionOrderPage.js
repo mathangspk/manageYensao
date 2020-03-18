@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/orderActions';
+import * as productActions from '../../actions/productActions';
 
 class ActionOrderPage extends Component {
 
@@ -23,7 +24,7 @@ class ActionOrderPage extends Component {
         quantity: 0,
         price: 0,
         cash: 0,
-        status: 0,
+        status: '',
 
         priceVND: '',
         cashVND: '',
@@ -164,7 +165,13 @@ class ActionOrderPage extends Component {
     }
 
     componentDidUpdate(nextprops) {
-        const { orderEditting } = this.props;
+        const { orderEditting, productSelected } = this.props;
+        if (productSelected !== nextprops.productSelected) {
+            var productPrice = productSelected.map((product) => {
+                return parseInt(product.price)
+            })
+            this.setState({ price: Number(productPrice) })
+        }
         if (orderEditting !== nextprops.orderEditting) {
             this.setState({
                 _id: orderEditting._id,
@@ -191,12 +198,15 @@ class ActionOrderPage extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ [e.target.name]: e.target.value });
+        if (e.target.name === 'product') {
+            this.props.getPriceFromProduct(e.target.value)
+        }
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        
+
         const order = {
             _id: this.state._id,
             customer: this.state.customer,
@@ -212,8 +222,8 @@ class ActionOrderPage extends Component {
     }
 
     render() {
-        var {products} = this.props;
-        var { priceVND, cashVND, customer, product, quantity, price, cash } = this.state;
+        var { products } = this.props;
+        var { priceVND, cashVND, customer, product, quantity, price, cash, status } = this.state;
         var listProduct = products.map(({ title }, index) => {
             return (<option key={index}>{title}</option>)
         })
@@ -281,6 +291,24 @@ class ActionOrderPage extends Component {
                         onChange={this.onChange}
                         className='mb-3'
                     ></Input>
+
+                    <InputGroup className='mb-3'>
+                        <InputGroupAddon addonType="prepend">
+                            <InputGroupText>Trạng thái đơn hàng:</InputGroupText>
+                        </InputGroupAddon>
+                        <Input
+                            type="select"
+                            name="status"
+                            id="status"
+                            value={status}
+                            onChange={this.onChange}
+                        >
+                            <option >Khởi tạo đơn hàng</option>
+                            <option>Đã đóng gói xong</option>
+                            <option>Đang giao hàng</option>
+                            <option>Đã giao thành công</option>
+                        </Input>
+                    </InputGroup>
                     <Button
                         type="submit"
                         color="dark"
@@ -308,7 +336,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         updateOrder: (order) => {
             dispatch(actions.updateOrder(order))
         },
-        
+        getPriceFromProduct: (product) => {
+            dispatch(productActions.getPriceFromProduct(product))
+        }
+
+
     }
 }
 
@@ -318,7 +350,8 @@ const mapStateToProps = (state, ownProps) => {
         isAuthenticated: state.auth.isAuthenticated,
         errorOrder: state.errorOrder,
         isCreateSuccess: state.orders.isCreateSuccess,
-        products: state.products.products
+        products: state.products.products,
+        productSelected: state.products.productSelected,
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ActionOrderPage);

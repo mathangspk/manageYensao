@@ -5,7 +5,7 @@ class OrderList extends Component {
         return (
             <Fragment>
                 <Container>
-                    <Table hover>
+                    <Table hover responsive>
                         <thead>
                             <tr>
                                 <th>#</th>

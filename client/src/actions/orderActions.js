@@ -18,6 +18,7 @@ export const listAll = () => (dispatch, getState) => {
 
 }
 export const addOrder = (order) => (dispatch, getState) => {
+    console.log(order)
     axios.post(`${URL}/api/orders`, order, tokenConfig(getState))
         .then(res =>
             dispatch({

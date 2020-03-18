@@ -16,7 +16,6 @@ import {
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/orderActions';
 import * as productActions from '../../../actions/productActions';
-import { filter } from 'lodash';
 class OrderModal extends Component {
     state = {
         modal: false,
@@ -25,12 +24,11 @@ class OrderModal extends Component {
         quantity: 0,
         price: 0,
         cash: 0,
-        status: 0,
+        status: '',
 
         priceVND: '',
         cashVND: '',
         msg: '',
-        priceFromProduct: ''
 
     }
     toggle = () => {
@@ -56,9 +54,8 @@ class OrderModal extends Component {
             quantity: this.state.quantity,
             price: this.state.price,
             cash: this.state.cash,
-            status: 1,
+            status: 'Khởi tạo đơn hàng',
         }
-
         //add order via addorder action
         this.props.addNewOrder(newOrder);
         //this.toggle();
@@ -71,7 +68,7 @@ class OrderModal extends Component {
             quantity: 0,
             price: 0,
             cash: 0,
-            status: 0,
+            status: '',
 
             priceVND: '',
             cashVND: '',
@@ -205,18 +202,13 @@ class OrderModal extends Component {
 
     componentDidUpdate(nextprops) {
         const { errorOrder, isCreateSuccess, productSelected } = this.props;
-
-        console.log(productSelected);
-        console.log(nextprops.productSelected)
         if (productSelected !== nextprops.productSelected) {
             var productPrice = productSelected.map((product) => {
                 return parseInt(product.price)
             })
-            this.setState({ price: productPrice })
+            this.setState({ price: Number(productPrice) })
         }
-
         var { price, cash } = this.state;
-
         var priceVND = this.convertNumberToVND(price)
         var cashVND = this.convertNumberToVND(cash)
         if (priceVND !== this.state.priceVND && price)
@@ -227,8 +219,6 @@ class OrderModal extends Component {
             this.setState({
                 cashVND
             })
-        console.log(this.state.product)
-
         if (errorOrder !== nextprops.errorOrder) {
             console.log(errorOrder.msg)
             if (errorOrder.id === 'ADD_ORDER_FAIL') {

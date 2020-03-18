@@ -58,32 +58,32 @@ const createOrderValidation = (data) => {
                 })
             }),
         price: Joi.number().min(1).required()
-        .error((errors) => {
-            return errors.map(error => {
-                switch (error.type) {
-                    case "number.min":
-                        return { message: "Vui lòng nhập giá sản phẩm" };
-                    case "string.max":
-                        return { message: "second msg" };
-                    case "any.empty":
-                        return { message: "Số lượng không để trống" };
-                }
-            })
-        }),
+            .error((errors) => {
+                return errors.map(error => {
+                    switch (error.type) {
+                        case "number.min":
+                            return { message: "Vui lòng nhập giá sản phẩm" };
+                        case "string.max":
+                            return { message: "second msg" };
+                        case "any.empty":
+                            return { message: "Số lượng không để trống" };
+                    }
+                })
+            }),
         cash: Joi.number().min(1).required()
-        .error((errors) => {
-            return errors.map(error => {
-                switch (error.type) {
-                    case "number.min":
-                        return { message: "Vui lòng nhập tổng tiền đơn hàng" };
-                    case "string.max":
-                        return { message: "second msg" };
-                    case "any.empty":
-                        return { message: "Số lượng không để trống" };
-                }
-            })
-        }),
-        status: Joi.number().required(),
+            .error((errors) => {
+                return errors.map(error => {
+                    switch (error.type) {
+                        case "number.min":
+                            return { message: "Vui lòng nhập tổng tiền đơn hàng" };
+                        case "string.max":
+                            return { message: "second msg" };
+                        case "any.empty":
+                            return { message: "Số lượng không để trống" };
+                    }
+                })
+            }),
+        status: Joi.string().required()
 
     }
     return Joi.validate(data, schema)
@@ -119,31 +119,31 @@ const productValidation = (data) => {
                 })
             }),
         price: Joi.number().min(1).required()
-        .error((errors) => {
-            return errors.map(error => {
-                switch (error.type) {
-                    case "number.min":
-                        return { message: "Vui lòng nhập giá sản phẩm" };
-                    case "string.max":
-                        return { message: "second msg" };
-                    case "any.empty":
-                        return { message: "Giá sản phẩm không để trống" };
-                }
-            })
-        }),
+            .error((errors) => {
+                return errors.map(error => {
+                    switch (error.type) {
+                        case "number.min":
+                            return { message: "Vui lòng nhập giá sản phẩm" };
+                        case "string.max":
+                            return { message: "second msg" };
+                        case "any.empty":
+                            return { message: "Giá sản phẩm không để trống" };
+                    }
+                })
+            }),
         productId: Joi.number().min(1).required()
-        .error((errors) => {
-            return errors.map(error => {
-                switch (error.type) {
-                    case "number.min":
-                        return { message: "Vui lòng nhập giá sản phẩm" };
-                    case "string.max":
-                        return { message: "second msg" };
-                    case "any.empty":
-                        return { message: "ProductId không để trống" };
-                }
-            })
-        }),
+            .error((errors) => {
+                return errors.map(error => {
+                    switch (error.type) {
+                        case "number.min":
+                            return { message: "Vui lòng nhập giá sản phẩm" };
+                        case "string.max":
+                            return { message: "second msg" };
+                        case "any.empty":
+                            return { message: "ProductId không để trống" };
+                    }
+                })
+            }),
         status: Joi.number(),
     }
     return Joi.validate(data, schema)
