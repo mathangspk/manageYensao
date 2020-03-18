@@ -14,17 +14,17 @@ class OrderItem extends Component {
         return (<Fragment>
             <tr key={_id}>
                 <th scope="row">{index + 1}</th>
-                <td ><span className =  "bg-primary text-white rounded-bottom">{customer}</span> </td>
+                <td ><span className =  "bg-primary text-white rounded">{customer}</span> </td>
                 <td>{product}</td>
                 <td>{quantity}</td>
                 <td>{price}</td>
                 <td>{cash}</td>
                 <td >
-                <span className =  "bg-success text-white rounded-bottom">{status}</span>
+                <span className =  "bg-success text-white rounded ">{status}</span>
                 </td>
                 <td>
-                    <Button className="btn btn-danger" onClick={() => this.deleteOrder(_id)}> <i className="fas fa-trash-alt fa-1x"></i></Button> &nbsp;
-                    <Link to={`/orders/${_id}/edit`} className="btn btn-success"><i className="fas fa-info fa-1x"></i></Link>
+                    <Button className="btn btn-danger" onClick={() => this.deleteOrder(_id)}> <i className="fas fa-trash-alt"></i></Button> &nbsp;
+                    <Link to={`/orders/${_id}/edit`} className="btn btn-success"><i className="fas fa-info"></i></Link>
                 </td>
             </tr>
             </Fragment>
