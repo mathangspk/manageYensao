@@ -32,6 +32,11 @@ const AppNavbar = (props) => {
       to: '/products',
       exact: false
     },
+    {
+      name: 'test',
+      to: '/test',
+      exact: false
+    },
   ]
 
   const MenuLink = ({ label, to, actionOnlyWhenExact }) => {

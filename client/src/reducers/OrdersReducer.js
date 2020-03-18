@@ -40,7 +40,7 @@ var myReducer = (state = initialState, action) => {
         case types.SEARCH_ORDER:
             var keyword = action.keyword;
             var orders = filter(state.orders, (order) => {
-                return order.customer.indexOf(keyword) !== -1;
+                return order.customer.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
             })
             return {
                 ...state,

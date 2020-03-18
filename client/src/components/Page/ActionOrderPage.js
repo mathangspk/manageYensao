@@ -8,7 +8,8 @@ import {
     // Alert,
     InputGroup,
     InputGroupAddon,
-    InputGroupText
+    InputGroupText,
+    Container
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/orderActions';
@@ -228,96 +229,98 @@ class ActionOrderPage extends Component {
             return (<option key={index}>{title}</option>)
         })
         return (
-            <Form onSubmit={this.onSubmit}>
-                <FormGroup>
-                    <InputGroup className='mb-3'>
-                        <InputGroupAddon addonType="prepend">
-                            <InputGroupText>></InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                            type="text"
-                            name="customer"
-                            id="customer"
-                            placeholder="Tên khách hàng"
-                            value={customer}
-                            onChange={this.onChange}
-                        ></Input>
-                    </InputGroup>
-                    <InputGroup className='mb-3'>
-                        <InputGroupAddon addonType="prepend">
-                            <InputGroupText>Sản phẩm</InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                            type="select"
-                            name="product"
-                            id="product"
-                            value={product}
-                            onChange={this.onChange}
-                        >{listProduct}
-                        </Input>
-                    </InputGroup>
+            <Container>
+                <Form onSubmit={this.onSubmit}>
+                    <FormGroup>
+                        <InputGroup className='mb-3'>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>></InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                                type="text"
+                                name="customer"
+                                id="customer"
+                                placeholder="Tên khách hàng"
+                                value={customer}
+                                onChange={this.onChange}
+                            ></Input>
+                        </InputGroup>
+                        <InputGroup className='mb-3'>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>Sản phẩm</InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                                type="select"
+                                name="product"
+                                id="product"
+                                value={product}
+                                onChange={this.onChange}
+                            >{listProduct}
+                            </Input>
+                        </InputGroup>
 
-                    <InputGroup className='mb-3'>
-                        <InputGroupAddon addonType="prepend">
-                            <InputGroupText>Số lượng</InputGroupText>
-                        </InputGroupAddon>
+                        <InputGroup className='mb-3'>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>Số lượng</InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                                type="number"
+                                name="quantity"
+                                id="quantity"
+                                onChange={this.onChange}
+                                value={quantity}
+                            ></Input>
+                        </InputGroup>
+                        <Label for="order">
+                            Giá: {priceVND !== null ? priceVND : null}
+                        </Label>
                         <Input
                             type="number"
-                            name="quantity"
-                            id="quantity"
+                            name="price"
+                            id="price"
+                            value={price}
                             onChange={this.onChange}
-                            value={quantity}
+                            className='mb-3'
                         ></Input>
-                    </InputGroup>
-                    <Label for="order">
-                        Giá: {priceVND !== null ? priceVND : null}
-                    </Label>
-                    <Input
-                        type="number"
-                        name="price"
-                        id="price"
-                        value={price}
-                        onChange={this.onChange}
-                        className='mb-3'
-                    ></Input>
-                    <Label for="order">
-                        Tổng tiền: {cashVND !== null ? cashVND : null}
-                    </Label>
-                    <Input
-                        type="number"
-                        name="cash"
-                        id="cash"
-                        value={cash}
-                        onChange={this.onChange}
-                        className='mb-3'
-                    ></Input>
-
-                    <InputGroup className='mb-3'>
-                        <InputGroupAddon addonType="prepend">
-                            <InputGroupText>Trạng thái đơn hàng:</InputGroupText>
-                        </InputGroupAddon>
+                        <Label for="order">
+                            Tổng tiền: {cashVND !== null ? cashVND : null}
+                        </Label>
                         <Input
-                            type="select"
-                            name="status"
-                            id="status"
-                            value={status}
+                            type="number"
+                            name="cash"
+                            id="cash"
+                            value={cash}
                             onChange={this.onChange}
-                        >
-                            <option >Khởi tạo đơn hàng</option>
-                            <option>Đã đóng gói xong</option>
-                            <option>Đang giao hàng</option>
-                            <option>Đã giao thành công</option>
-                        </Input>
-                    </InputGroup>
-                    <Button
-                        type="submit"
-                        color="dark"
-                        block
-                        style={{ marginBottom: '2rem' }}
-                        onClick={this.onSubmit}
-                    >Cập nhật đơn hàng</Button>
-                </FormGroup>
-            </Form>
+                            className='mb-3'
+                        ></Input>
+
+                        <InputGroup className='mb-3'>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>Trạng thái đơn hàng:</InputGroupText>
+                            </InputGroupAddon>
+                            <Input
+                                type="select"
+                                name="status"
+                                id="status"
+                                value={status}
+                                onChange={this.onChange}
+                            >
+                                <option >Khởi tạo đơn hàng</option>
+                                <option>Đã đóng gói xong</option>
+                                <option>Đang giao hàng</option>
+                                <option>Đã giao thành công</option>
+                            </Input>
+                        </InputGroup>
+                        <Button
+                            type="submit"
+                            color="dark"
+                            block
+                            style={{ marginBottom: '2rem' }}
+                            onClick={this.onSubmit}
+                        >Cập nhật đơn hàng</Button>
+                    </FormGroup>
+                </Form>
+            </Container>
         );
     }
 }
